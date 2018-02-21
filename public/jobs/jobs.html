@@ -1,0 +1,24 @@
+<br>
+<span ng-show="allJobs.length === 0"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+<div class="row">
+    <div class="col-lg-11 col-md-6">
+        <div ng-show="job.id && ($index < loadIndex)" ng-repeat="job in allJobs track by $index">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-target="#job{{$index}}">{{job.title}} </a><br>
+                        <h5>{{job.time | timeAgo}} </h5>
+                    </h4>
+                </div>
+                <div id="job{{$index}}" class="panel-collapse collapse" style="height: auto;">
+                    <div class="panel-body">
+                        <h4 ng-show="job.text" ng-bind-html="job.text">{{job.text}}</h4>
+                        <a ng-show="job.url" href="{{job.url}}">See Full Description</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button ng-show="allJobs.length>10" ng-click="loadMore()">Load More</button>
+    </div>
+</div>

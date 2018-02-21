@@ -1,0 +1,33 @@
+<br>
+<span ng-show="allStories.length === 0"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+<div class="row">
+    <div class="col-lg-11 col-md-6">
+        <div ng-show="story.id && ($index < loadIndex)" ng-repeat="story in allStories track by $index">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" ng-click="getComments(story.id, story.kids)" data-toggle="collapse" data-target="#story{{$index}}">{{story.title}} </a><br>
+                        -&nbsp;<b ng-show="story.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">{{story.by}}</b> {{story.time | timeAgo}}
+                    </h4>
+                </div>
+                <div id="story{{$index}}" class="panel-collapse collapse" style="height: auto;">
+                    <div class="panel-body">
+                        <h4 ng-show="story.text" ng-bind-html="story.text">{{story.text}}</h4>
+                        <a ng-show="story.url" href="{{story.url}}" >Read more about story</a>
+                        <div ng-show="allComments[story.id].length>0 && cmt.id" ng-repeat="cmt in allComments[story.id] track by $index">
+                            <h5 ng-bind-html="cmt.text">{{cmt.text}}</h5> -&nbsp;<b ng-show="cmt.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">{{cmt.by}}</b><b ng-show="!cmt.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">Unknown</b> {{cmt.time | timeAgo}}<br>
+                        </div>
+                        <div ng-show="!allComments[story.id].length>0">
+                            <h5>No Comments Yet!!!</h5>
+                        </div>
+                        <div>
+                            <textarea style="width: 400px; height: 100px;" type="text" ng-model="newComment.text"></textarea><br>
+                            <button ng-click="addCommentInStory(story.id, newComment)">Add Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button ng-show="allStories.length>10" ng-click="loadMore()">Load More</button>
+    </div>
+</div>

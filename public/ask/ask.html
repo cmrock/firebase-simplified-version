@@ -1,0 +1,34 @@
+<br>
+<span ng-show="allAsk.length === 0"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+<div class="row">
+    <div class="col-lg-11 col-md-6">
+        <div ng-show="ask.id && ($index < loadIndex)" ng-repeat="ask in allAsk track by $index">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="collapsed" ng-click="getComments(ask.id, ask.kids)" data-toggle="collapse" data-target="#ask{{$index}}">{{ask.title}} </a><br>
+                        <h5>-&nbsp;<b ng-show="ask.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">{{ask.by}}</b> {{ask.time | timeAgo}}  | {{ask.kids|cmtCount}} comments</h5>
+                    </h4>
+                </div>
+                <div id="ask{{$index}}" class="panel-collapse collapse" style="height: auto;">
+                    <div class="panel-body">
+                        <h4 ng-show="ask.text" ng-bind-html="ask.text">{{ask.text}}</h4>
+
+                        <div ng-show="allComments[ask.id].length>0 && cmt.id" ng-repeat="cmt in allComments[ask.id] track by $index">
+                            <h5 ng-bind-html="cmt.text">{{cmt.text}}</h5> -&nbsp;<b ng-show="cmt.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">{{cmt.by}}</b><b ng-show="!cmt.by" style="padding: 1px 5px; white-space: nowrap; color: #07C;text-decoration: none;">Unknown</b> {{cmt.time | timeAgo}}<br>
+                        </div>
+                        <div ng-show="!allComments[ask.id].length>0">
+                            <h5>No Comments Yet!!!</h5>
+                        </div>
+                        <div>
+                            <textarea style="width: 400px; height: 100px;" type="text" ng-model="newComment.text"></textarea><br>
+                            <button ng-click="addCommentInAsk(ask.id, newComment)">Add Comment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button ng-show="allAsk.length>10" ng-click="loadMore()">Load More</button>
+    </div>
+</div>

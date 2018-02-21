@@ -1,0 +1,16 @@
+{
+  "name": "Simplified Firebase Application.",
+  "version": "0.0.1",
+  "description": "Simplified Firebase Application.",
+  "main": "server.js",
+  "author": "Chirag",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.10.8",
+    "lodash": "*",
+    "method-override": "^2.3.10",
+    "moment": "*",
+    "mongoose": "4.10.8",
+    "morgan": "^1.9.0"
+  }
+}

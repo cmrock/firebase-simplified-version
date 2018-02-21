@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Simplified Firebase Application</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js"></script>
+
+	<script src="app.js"></script> <!-- load our main application -->
+	<script src="stories/newStories/newStoriesCtrl.js"></script>
+	<script src="stories/topStories/topStoriesCtrl.js"></script>
+	<script src="stories/bestStories/bestStoriesCtrl.js"></script>
+	<script  src="stories/directive/storyKind.js"></script>
+	<script src="ask/askCtrl.js"></script>
+	<script src="jobs/jobsCtrl.js"></script>
+
+
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainCtrl">
+
+	<!--SET THE NAVBAR-->
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<span ng-if="!isActive('/newStories') && !isActive('/topStories') && !isActive('/bestStories')">Stories <span class="caret"></span></span>
+				<span ng-if="isActive('/newStories')">New Stories <span class="caret"></span></span>
+				<span ng-if="isActive('/topStories')">Top Stories <span class="caret"></span></span>
+				<span ng-if="isActive('/bestStories')">Best Stories <span class="caret"></span></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li ng-class="{ active: isActive('/newStories')}"><a href="#!/newStories">New Stories</a></li>
+				<li ng-class="{ active: isActive('/topStories')}"><a href="#!/topStories">Top Stories</a></li>
+				<li ng-class="{ active: isActive('/bestStories')}"><a href="#!/bestStories">Best Stories</a></li>
+			</ul>
+		</li>
+		<li ng-class="{ active: isActive('/ask')}"><a href="#!/ask">Ask</a></li>
+		<li ng-class="{ active: isActive('/jobs')}"><a href="#!/jobs">Jobs</a></li>
+	</ul>
+	<div ng-view></div>
+	<div></div>
+</body>
+</html>
